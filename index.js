@@ -1,8 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
-import acbRoutes from "./routes/acb.js";
+import acbRoutes from "./routes/api/api.js";
+import {config} from "./config.js"
 
-mongoose.connect("mongodb://localhost/node-rest", {
+mongoose.connect(config.dbURL, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
@@ -21,11 +22,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-	res.send("Hello from homepage");
+	res.send("Home Page");
 });
 
-app.use("/users", acbRoutes);
+app.use("/api", acbRoutes);
 
-app.listen(PORT, () =>
+// Error handling middleware
+app.use((err, req, res, next) => {
+		res.status(422).send({ error: err.message });
+	});
+
+app.listen(config.PORT || 3000, () =>
 	console.log(`Server is running on http://localhost:${PORT}`)
 );
