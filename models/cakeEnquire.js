@@ -5,7 +5,7 @@ const cakeEnquire = new mongoose.Schema({
     type: String,
     required: true
   },
-  name: {
+  fullName: {
     type: String,
     required: true
   },
