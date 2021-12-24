@@ -1,37 +1,53 @@
 import { v4 as uuidv4 } from "uuid";
 
 let mailingList = [
-  {
-    email: "test@testmail.com",
-    signUpDate: ""
-  },
+	{
+		id: 1,
+		email: "test@testmail.com", 
+		signUpDate: "Date 1"
+	},
+	{
+		id: 2,
+		email: "test2@testmail.com", 
+		signUpDate: "Date 2"
+	},
 ];
 
 export const getEmails = (req, res) => {
-  res.send(mailingList);
+	const body = {data: mailingList}
+	res.status(200).send(body)
 };
 
 export const emailSignUp = (req, res) => {
-  const email = req.body;
+	// res.send({type: GET})
 
-  mailingList.push({ ...email, id: uuidv4() });
+	const email = req.body;
 
-  res.send(`User with the email ${mailingList.email} added to the database`);
+	mailingList.push({ ...email, id: uuidv4() });
+
+	res.send(`User with the email ${mailingList.email} added to the database`);
 };
 
 export const getEmailByID = (req, res) => {
-  const { id } = req.params;
+	// res.send({type: GET})
 
-  const foundUser = mailingList.find((user) => user.id === id);
-
-  res.send(foundUser);
+	const { id } = req.params;	
+	const foundUser = mailingList.find((user) => user.id === parseInt(id));
+		
+	if (foundUser) {
+		res.status(200).json(foundUser)
+	} else {
+		res.status(400).json({message: `no email by id: ${id} found`})
+	}
+	// res.send(foundUser);
 };
 
 //todo Make a delete by email controller
 export const deleteUserByID = (req, res) => {
-  const { id } = req.params;
+	res.send({type: DELETE});
+	const { id } = req.params;
 
-  users = users.filter((user) => user.id !== id);
+	users = users.filter((user) => user.id !== id);
 
-  res.send(`user with id ${id} deleted`);
+	res.send(`user with id ${id} deleted`);
 };
