@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
-
 let mailingList = [
 	{
 		id: 1,
@@ -13,12 +11,12 @@ let mailingList = [
 	},
 ];
 
-export const getEmails = (req, res) => {
+const getEmails = (req, res) => {
 	const body = {data: mailingList}
 	res.status(200).send(body)
 };
 
-export const emailSignUp = (req, res) => {
+const emailSignUp = (req, res) => {
 	// res.send({type: GET})
 
 	const email = req.body;
@@ -28,7 +26,7 @@ export const emailSignUp = (req, res) => {
 	res.send(`User with the email ${mailingList.email} added to the database`);
 };
 
-export const getEmailByID = (req, res) => {
+const getEmailByID = (req, res) => {
 	// res.send({type: GET})
 
 	const { id } = req.params;	
@@ -43,7 +41,7 @@ export const getEmailByID = (req, res) => {
 };
 
 //todo Make a delete by email controller
-export const deleteUserByID = (req, res) => {
+const deleteUserByID = (req, res) => {
 	res.send({type: DELETE});
 	const { id } = req.params;
 
@@ -51,3 +49,10 @@ export const deleteUserByID = (req, res) => {
 
 	res.send(`user with id ${id} deleted`);
 };
+
+module.exports = {
+	getEmails,
+	getEmailByID,
+	emailSignUp,
+	deleteUserByID
+}

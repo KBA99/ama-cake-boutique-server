@@ -1,7 +1,7 @@
-import express from "express";
-import mongoose from "mongoose";
-import acbRoutes from "./routes/api/api.js";
-import {config} from "./config.js"
+const express = require("express");
+const mongoose = require("mongoose");
+const acbRoutes = require("./routes/api/api.js");
+const config = require("./config.js")
 
 mongoose.connect(config.dbURL, {
 	useNewUrlParser: true,
@@ -33,5 +33,5 @@ app.use((err, req, res, next) => {
 	});
 
 app.listen(config.PORT || 3000, () =>
-	console.log(`Server is running on http://localhost:${PORT}`)
+	config.PORT ? console.log(`Server is running on http://localhost:${PORT}`) : console.log(`Server is running on http://localhost:${3000}`)
 );
