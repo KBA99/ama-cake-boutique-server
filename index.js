@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const acbRoutes = require("./routes/api/api.js");
+const cakeRoute = require("./routes/api/cake.js")
+const emailRoute = require("./routes/api/email.js")
 const config = require("./config.js")
 
 mongoose.connect(config.dbURL, {
@@ -26,6 +28,10 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", acbRoutes);
+
+app.use("/cake", cakeRoute);
+
+app.use("/email", emailRoute);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
