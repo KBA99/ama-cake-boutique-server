@@ -1,8 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const acbRoutes = require("./routes/api/api.js");
 const cakeRoute = require("./routes/api/cake.js")
-const emailRoute = require("./routes/api/email.js")
+const emailRoute = require("./routes/api/cake.js")
 const config = require("./config.js")
 
 mongoose.connect(config.dbURL, {
@@ -26,8 +25,6 @@ app.use(express.json());
 app.get("/", (req, res) => {
 	res.send("Home Page");
 });
-
-app.use("/api", acbRoutes);
 
 app.use("/cake", cakeRoute);
 
