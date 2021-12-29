@@ -1,7 +1,6 @@
 const Email = require("../models/mailingList")
 
 const addToMailingList = async (req, res) => {
-//TODO Check the collection to see if it already has the email in the mailing list, if so then sends an error message to the user
 	const {email} = req.body
     try {
 		if(!Email.exists({email})) {
