@@ -1,8 +1,10 @@
-import express from "express";
-import mongoose from "mongoose";
-import acbRoutes from "./routes/acb.js";
+const express = require("express");
+const mongoose = require("mongoose");
+const cakeRoute = require("./routes/api/cake.js")
+const emailRoute = require("./routes/api/email.js")
+const config = require("./config.js")
 
-mongoose.connect("mongodb://localhost/node-rest", {
+mongoose.connect(config.dbURL, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
@@ -14,18 +16,23 @@ db.on("open", () => console.log("Connected to Database"));
 
 const app = express();
 
-const PORT = 5000;
-
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-	res.send("Hello from homepage");
+	res.send("Home Page");
 });
 
-app.use("/users", acbRoutes);
+app.use("/cake", cakeRoute);
 
-app.listen(PORT, () =>
-	console.log(`Server is running on http://localhost:${PORT}`)
+app.use("/email", emailRoute);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+		res.status(422).send({ error: err.message });
+	});
+
+app.listen(config.PORT || 3000, () =>
+	config.PORT ? console.log(`Server is running on http://localhost:${config.PORT}`) : console.log(`Server is running on http://localhost:${3000}`)
 );
