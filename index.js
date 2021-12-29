@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cakeRoute = require("./routes/api/cake.js")
-const emailRoute = require("./routes/api/cake.js")
+const emailRoute = require("./routes/api/email.js")
 const config = require("./config.js")
 
 mongoose.connect(config.dbURL, {
@@ -15,8 +15,6 @@ db.on("error", (error) => console.log(error));
 db.on("open", () => console.log("Connected to Database"));
 
 const app = express();
-
-const PORT = 5000;
 
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
@@ -36,5 +34,5 @@ app.use((err, req, res, next) => {
 	});
 
 app.listen(config.PORT || 3000, () =>
-	config.PORT ? console.log(`Server is running on http://localhost:${PORT}`) : console.log(`Server is running on http://localhost:${3000}`)
+	config.PORT ? console.log(`Server is running on http://localhost:${config.PORT}`) : console.log(`Server is running on http://localhost:${3000}`)
 );
