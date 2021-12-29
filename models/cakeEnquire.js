@@ -7,7 +7,7 @@ const cakeEnquireSchema = new mongoose.Schema({
 	// },
 	fullName: {
 		type: String,
-		required: false
+		required: true
 	},
 	email: {
 		type: String,
@@ -16,7 +16,7 @@ const cakeEnquireSchema = new mongoose.Schema({
 	},
 	dateOfEvent: {
 		type: Date,
-		required: false
+		required: true
 	},
 	partyOccasion: {
 		type: String,
@@ -24,11 +24,11 @@ const cakeEnquireSchema = new mongoose.Schema({
 	},
 	cakeTaste: {
 		type: String,
-		required: false
+		required: true
 	},
 	cakeTopper: {
 		type: Boolean,
-		required: false
+		required: true
 	},
 	extraDetails: {
 		type: String,
