@@ -5,8 +5,8 @@ const { createDefault, getEnquiryByIdAndEmail, createCakeEnquiry } = require ('.
 
 router.get('/default', createDefault);
 
-router.get('/makeEnquiry', createCakeEnquiry)
+router.post('/makeEnquiry', createCakeEnquiry)
 
-router.get('/getEnquiry', getEnquiryByIdAndEmail)
+router.post('/getEnquiry', getEnquiryByIdAndEmail)
 
 module.exports = router;
